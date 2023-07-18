@@ -18,7 +18,6 @@ class UserController extends Controller
         $users = $this->service->getAll(
            filter: $request->get('filter', '')
         );
-        dd($users);
 
         return view('admin.users.index', compact('users'));
     }
