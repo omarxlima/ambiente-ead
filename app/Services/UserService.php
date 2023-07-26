@@ -4,6 +4,7 @@
 
 use App\Repositories\Eloquent\UserRepository;
 use App\Repositories\UserRepositoryInterface;
+use stdClass;
 
  class UserService
  {
@@ -16,7 +17,9 @@ use App\Repositories\UserRepositoryInterface;
 
     public function getAll(string $filter = ''): array
     {
-        return $this->repository->getAll($filter);
+        $users = $this->repository->getAll($filter);
+
+        return convertArrayToObject($users);
     }
     public function findById(string $id):object|null
     {
