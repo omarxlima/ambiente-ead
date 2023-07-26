@@ -30,6 +30,13 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
+    public function show($id)
+    {
+        if (!$user = $this->service->findById($id))
+        return back();
+        return view('admin.users.show', compact('user'));
+    }
+
     public function store(StoreUserRequest $request)
 
     {
@@ -50,6 +57,12 @@ class UserController extends Controller
         if (!$this->service->update($id,$request->validated())) {
             return redirect()->back();
         }
+        return redirect()->route('users.index');
+    }
+
+    public function destroy($id)
+    {
+        $this->service->delete($id);
         return redirect()->route('users.index');
     }
 }
