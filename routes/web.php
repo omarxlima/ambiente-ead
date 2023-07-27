@@ -2,12 +2,21 @@
 
 use App\Http\Controllers\Admin\{
     AdminController,
+    CourseController,
     DashboardController,
     UserController
 };
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->group(function(){
+
+       /**
+     * routes coures
+     */
+
+     Route::resource('/courses', CourseController::class);
+     Route::put('admins/{id}/update-photo', [CourseController::class, 'uploadFile'])->name('admins.update.image');
+     Route::get('/admins/{id}/image', [CourseController::class, 'changeImage'])->name('admins.change.image');
     /**
      * routes admins
      */

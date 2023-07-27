@@ -77,7 +77,7 @@ class UserController extends Controller
 
     public function uploadFile(StoreImageRequest $request, UploadFile $uploadFile, $id)
     {
-        // dd($request->image);
+        dd($request->image);
         $path = $uploadFile->store($request->images, 'users');
         if (!$this->service->update($id, ['images' => $path])) {
             return redirect()->back();
