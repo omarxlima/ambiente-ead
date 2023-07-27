@@ -3,14 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +25,7 @@ class Admin extends Authenticatable
         'name',
         'email',
         'password',
+        'images',
     ];
 
     /**
@@ -41,5 +46,19 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'id' => 'string',
     ];
+
+    public $incrementing = false;
+
+    // public function getCreatedAtAttribute() {
+    //     return Carbon::make($this->attributes['created_at'])->format('d/m/Y');
+    // }
+
+    protected function createdAt(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value) => Carbon::make($value)->format('d/m/Y'),
+        );
+    }
 }
