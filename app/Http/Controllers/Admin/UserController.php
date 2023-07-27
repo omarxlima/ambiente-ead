@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreImageRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Services\UploadFile;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -19,7 +21,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = $this->service->getAll(
-            filter: $request->get('filter', '')
+            filter: $request->filter ?? ""
         );
 
         return view('admin.users.index', compact('users'));
@@ -63,6 +65,23 @@ class UserController extends Controller
     public function destroy($id)
     {
         $this->service->delete($id);
+        return redirect()->route('users.index');
+    }
+
+    public function changeImage($id)
+    {
+        if(!$user = $this->service->findById($id))
+        return back();
+        return view('admin.users.change-image', compact('user'));
+    }
+
+    public function uploadFile(StoreImageRequest $request, UploadFile $uploadFile, $id)
+    {
+        // dd($request->image);
+        $path = $uploadFile->store($request->images, 'users');
+        if (!$this->service->update($id, ['images' => $path])) {
+            return redirect()->back();
+        }
         return redirect()->route('users.index');
     }
 }
