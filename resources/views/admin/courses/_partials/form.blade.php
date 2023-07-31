@@ -15,9 +15,12 @@
 
 </div>
 <div class="mt-2">
-    @include('admin.includes.alerts')
     <label class=" block text-sm text-gray-600" for="image">Imagem</label>
     <input class="w-full px-5  py-2 text-gray-700 bg-gray-200 rounded" type="file" name="image"  >
+</div>
+<div class="mt-2">
+    <label class=" block text-sm text-gray-600" for="image">Descrição</label>
+    <textarea name="description" id="" cols="30" rows="5"  class="w-full px-5  py-2 text-gray-700 bg-gray-200 rounded" placeholder="Descrição do Curso" >{{ $course->description ?? old('description') }}</textarea>
 </div>
 <div class="mt-6">
     <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Enviar</button>

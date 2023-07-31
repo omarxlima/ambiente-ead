@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Cursos')
+@section('title',"Módulos do Curso {$course->name}")
 
 @section('content')
 
@@ -11,13 +11,13 @@
     <div class="w-full mt-12">
 
         <h1 class="text-3xl text-black pb-6">
-            Cursos
-            <a href="{{ route('courses.create') }}"
+            Módulos do Curso {{$course->name}}
+            <a href="{{ route('modules.create', $course->id) }}"
                 class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
                 <i class="fas fa-plus"></i>
             </a>
         </h1>
-                @include('admin.courses._partials.form-search', ['routerName' => 'courses.index'])
+                {{-- @include('admin.courses._partials.form-search', ['routerName' => 'modules.index']) --}}
         <div class="bg-white overflow-auto">
             <table class="min-w-full leading-normal">
                 <thead>
@@ -26,10 +26,7 @@
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                             Nome
                         </th>
-                        <th
-                            class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                            Disponível
-                        </th>
+
 
                         <th
                             class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -39,24 +36,17 @@
                 </thead>
                 <tbody>
 
-                    @forelse ($courses as $course)
+                    @forelse ($modules as $module)
                         <tr>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
-                                    <div class="flex-shrink-0 w-10 h-10">
-                                        <img class="w-full h-full rounded-full"
-                                            src="{{ $course->image ? url("storage/{$course->image}") : url('images/user.png') }}"
-                                            alt=" {{ $course->name }} " />
-                                    </div>
+
                                     <div class="ml-3">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            {{ $course->name }}
+                                            {{ $module->name }}
                                         </p>
                                     </div>
                                 </div>
-                            </td>
-                            <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ $course->available ? 'Disponível' : 'Não Disponível' }}</p>
                             </td>
 
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -85,7 +75,7 @@
                                         class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                         <span aria-hidden
                                             class="absolute inset-0 bg-gray-200 opacity-50 rounded-full"></span>
-                                        <span class="relative">Módulos</span>
+                                        <span class="relative">Aulas</span>
                                     </span>
                                 </a>
                             </td>
@@ -95,7 +85,7 @@
 
                         <tr>
                             <td colspan="1000">
-                                Nenhum curso registrado!
+                                Nenhum módulo registrado!
                             </td>
                         </tr>
                     @endforelse

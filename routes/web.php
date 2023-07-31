@@ -4,26 +4,35 @@ use App\Http\Controllers\Admin\{
     AdminController,
     CourseController,
     DashboardController,
+    ModuleController,
     UserController
 };
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->group(function(){
-
-       /**
+Route::prefix('admin')->group(function () {
+    /**
      * routes coures
      */
 
-     Route::resource('/courses', CourseController::class);
-     Route::put('admins/{id}/update-photo', [CourseController::class, 'uploadFile'])->name('admins.update.image');
-     Route::get('/admins/{id}/image', [CourseController::class, 'changeImage'])->name('admins.change.image');
+    Route::resource(
+        name: '/courses/{courseId}/modules',
+        controller: ModuleController::class,
+    );
+
+    /**
+     * routes coures
+     */
+
+    Route::resource('/courses', CourseController::class);
+    Route::put('admins/{id}/update-photo', [CourseController::class, 'uploadFile'])->name('admins.update.image');
+    Route::get('/admins/{id}/image', [CourseController::class, 'changeImage'])->name('admins.change.image');
     /**
      * routes admins
      */
 
-     Route::resource('/admins', AdminController::class);
-     Route::put('admins/{id}/update-photo', [AdminController::class, 'uploadFile'])->name('admins.update.image');
-     Route::get('/admins/{id}/image', [AdminController::class, 'changeImage'])->name('admins.change.image');
+    Route::resource('/admins', AdminController::class);
+    Route::put('admins/{id}/update-photo', [AdminController::class, 'uploadFile'])->name('admins.update.image');
+    Route::get('/admins/{id}/image', [AdminController::class, 'changeImage'])->name('admins.change.image');
 
     /**
      * routes Users

@@ -27,7 +27,7 @@ use App\Repositories\CourseRepositoryInterface;
     {
         return $this->repository->create($data);
     }
-    public function update( string $id, array $data):object|null
+    public function update( string $id, array $data)
     {
         return $this->repository->update($id, $data);
     }
