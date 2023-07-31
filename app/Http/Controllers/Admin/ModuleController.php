@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateModuleRequest;
 use App\Repositories\{
     CourseRepositoryInterface,
     ModuleRepositoryInterface,
@@ -50,7 +51,7 @@ class ModuleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $courseId)
+    public function store(StoreUpdateModuleRequest $request, $courseId)
     {
         if (!$course = $this->repositoryCourse->findById($courseId))
         return back();
@@ -63,32 +64,45 @@ class ModuleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($courseId, string $id)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId))
+        return back();
+        if (!$module = $this->repository->findById($id))
+        return back();
+      return view('admin.courses.modules.show-modules', compact('course', 'module'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($courseId,string $id)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId))
+        return back();
+        if (!$module = $this->repository->findById($id))
+        return back();
+      return view('admin.courses.modules.edit-modules', compact('course', 'module'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreUpdateModuleRequest $request, $courseId,string $id)
     {
-        //
+        if (!$course = $this->repositoryCourse->findById($courseId))
+        return back();
+        $this->repository->update($id, $request->only('name'));
+        return redirect()->route('modules.index', $courseId);
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($courseId, string $id)
     {
-        //
+        $this->repository->delete($id);
+        return redirect()->route('modules.index', $courseId);
     }
 }

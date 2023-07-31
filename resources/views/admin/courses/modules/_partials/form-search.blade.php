@@ -1,4 +1,4 @@
-<form action="{{ route($routerName) }}" method="get">
+<form action="{{ route($routerName, $params ?? '') }}" method="get">
 
     {{-- <div class="relative mb-4 xl:w-96">
         <input type="filter"

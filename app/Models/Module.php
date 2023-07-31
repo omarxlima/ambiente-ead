@@ -15,7 +15,9 @@ class Module extends Model
         'name'
     ];
 
-
+    protected $casts = [
+        'id' => 'string',
+    ];
 
     public function course(){
         return $this->belongsTo(Course::class);
