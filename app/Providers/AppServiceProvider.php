@@ -7,6 +7,7 @@ use App\Repositories\Eloquent\{
     CourseRepository,
     LessonRepository,
     ModuleRepository,
+    SupportRepository,
     UserRepository,
 };
 use App\Repositories\{
@@ -14,6 +15,7 @@ use App\Repositories\{
     CourseRepositoryInterface,
     LessonRepositoryInterface,
     ModuleRepositoryInterface,
+    SupportRepositoryInterface,
     UserRepositoryInterface,
 };
 use Illuminate\Support\ServiceProvider;
@@ -48,6 +50,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton( //bind cria uma instancia e armazena na memoria
             LessonRepositoryInterface::class,
             LessonRepository::class,
+        );
+        $this->app->singleton( //bind cria uma instancia e armazena na memoria
+            SupportRepositoryInterface::class,
+            SupportRepository::class,
         );
     }
 
