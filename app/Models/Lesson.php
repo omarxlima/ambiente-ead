@@ -10,7 +10,11 @@ class Lesson extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'url', 'video', 'description'
+        'module_id', 'name', 'url', 'video', 'description'
+    ];
+
+    protected $casts = [
+        'id' => 'string',
     ];
 
     public function module(){

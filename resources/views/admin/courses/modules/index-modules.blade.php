@@ -75,7 +75,7 @@
                                     </span>
                                 </a>
 
-                                <a href=" {{ route('modules.index', $course->id) }} ">
+                                <a href=" {{ route('lessons.index', $module->id) }} ">
                                     <span
                                         class="relative inline-block px-3 py-1 font-semibold text-gray-900 leading-tight">
                                         <span aria-hidden
