@@ -14,9 +14,11 @@ class Course extends Model
     ];
 
     protected $casts = [
-  
+
         'id' => 'string',
     ];
+    public $incrementing = false;
+    
 
     public function modules(){
         return $this->hasMany(Module::class);

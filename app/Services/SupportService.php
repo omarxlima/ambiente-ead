@@ -17,10 +17,14 @@ use stdClass;
 
     public function getSupports(string $status = 'P')
     {
-        return $this->repository->getByStatus($status);
-
-
-
+        $data =  $this->repository->getByStatus($status);
+        return convertArrayToObject($data);
     }
+
+    public function getSupport(string $id)
+    {
+        return $this->repository->findById($id);
+    }
+
 
  }

@@ -41,21 +41,21 @@
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-10 h-10">
-                                        @if ($support->user->image)
+                                        @if ($support->user['images'] ?? '')
                                         <img class="w-full h-full rounded-full"
-                                            src="{{  url("storage/{$support->user->image}") }}"
-                                            alt=" {{ $support->user->name }} " />
+                                            src="{{  url("storage/{$support->user['images']}") }}"
+                                            alt=" {{$support->user['name'] }} " />
                                         @endif
                                     </div>
                                     <div class="ml-3">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            {{ $support->user->name }}
+                                            {{ $support->user['name'] ?? ''}}
                                         </p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                <p class="text-gray-900 whitespace-no-wrap">{{ $support->lesson->name }}</p>
+                                <p class="text-gray-900 whitespace-no-wrap">  {{ $support->lesson['name'] ?? ''}} </p>
                             </td>
 
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">

@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reply_support', function (Blueprint $table) {
+        Schema::create('reply_supports', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('suport_id')->index();
+            $table->uuid('support_id')->index();
             $table->uuid('user_id')->nullable();
             $table->uuid('admin_id')->nullable();
             $table->text('description');
             $table->timestamps();
 
-            $table->foreign('suport_id')
-                            ->references('id')
-                            ->on('supports');
+            $table->foreign('support_id')
+                ->references('id')
+                ->on('supports');
         });
     }
 

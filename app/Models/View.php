@@ -12,4 +12,7 @@ class View extends Model
     protected $fillable = [
         'user_id', 'lesson_id', 'qty'
     ];
+
+    public $incrementing = false;
+
 }
